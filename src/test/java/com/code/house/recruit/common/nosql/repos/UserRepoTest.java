@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.CollectionOptions;
@@ -18,7 +19,7 @@ import java.util.concurrent.CountDownLatch;
 
 import static com.code.house.recruit.common.nosql.documents.User.builder;
 
-@DataMongoTest
+@DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class UserRepoTest {
