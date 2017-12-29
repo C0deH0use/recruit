@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.CollectionOptions;
@@ -19,8 +18,8 @@ import java.util.concurrent.CountDownLatch;
 
 import static com.code.house.recruit.common.nosql.documents.User.builder;
 
-@DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
-@SpringBootTest
+@DataMongoTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 public class UserRepoTest {
     @Autowired
@@ -40,7 +39,7 @@ public class UserRepoTest {
                 Flux.just(builder()
                                 .email("info@code-house.pl")
                                 .firstName("Mms")
-                                .lastName("YouKnowHwo")
+                                .lastName("YouKnowWho")
                                 .status(User.Status.ACTIVE)
                                 .build(),
                         builder()
