@@ -25,7 +25,7 @@ public class UserRepoTest {
     private UserRepo repo;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         if (template.collectionExists(User.class)) {
             template.dropCollection(User.class);
         }
@@ -48,8 +48,13 @@ public class UserRepoTest {
     }
 
     @Test
-    public void test1() throws Exception {
+    public void test1() {
         assertThat(repo.count()).isEqualTo(2);
     }
 
+
+    @Test
+    public void shouldSuccessfullyFindUserByEmail(){
+        assertThat(repo.findByEmail("info@code-house.pl")).isNotNull();
+    }
 }
