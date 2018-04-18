@@ -6,9 +6,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.code.house.recruit.common.domain")
+@EnableWebMvc
+@ComponentScan(basePackages = "com.code.house.recruit")
 @EntityScan(basePackages = {"com.code.house.recruit.common.nosql.documents"})
 @EnableMongoAuditing
 @EnableMongoRepositories(basePackages = {"com.code.house.recruit.common.nosql.repos"})

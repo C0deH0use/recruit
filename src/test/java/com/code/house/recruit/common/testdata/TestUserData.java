@@ -19,4 +19,21 @@ public class TestUserData {
                     .build();
         }
     }
+
+    public static class USER_2 {
+        public static final String firstName = "Name B";
+        public static final String lastName = "LastName B";
+
+        public static final String email = "name_b@gmail.com";
+        public static final User.Status status = User.Status.ACTIVE;
+
+        public static final User build() {
+            return User.builder()
+                    .firstName(firstName)
+                    .lastName(lastName)
+                    .email(email)
+                    .status(status)
+                    .build();
+        }
+    }
 }

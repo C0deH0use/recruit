@@ -1,7 +1,9 @@
 package com.code.house.recruit.common.nosql.documents;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,6 +19,8 @@ import java.util.Set;
 @Data
 @Builder
 @Document
+@NoArgsConstructor
+@AllArgsConstructor
 public class Questionnaire implements Persistable<String> {
 
     @Id
