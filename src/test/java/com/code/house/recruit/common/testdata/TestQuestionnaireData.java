@@ -1,6 +1,7 @@
 package com.code.house.recruit.common.testdata;
 
 import com.code.house.recruit.common.nosql.documents.Question;
+import com.code.house.recruit.common.nosql.documents.Questionnaire;
 import com.code.house.recruit.common.nosql.documents.User;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,12 @@ public final class TestQuestionnaireData {
                 ImmutablePair.of(TestQuestionData.QUESTION_1, StringUtils.EMPTY),
                 ImmutablePair.of(TestQuestionData.QUESTION_2, StringUtils.EMPTY)
         );
+        public static final Questionnaire entity(){
+            return Questionnaire.builder()
+                    .user(USER)
+                    .candidateQuestions(candidateQuestions)
+                    .build();
+        }
     }
 
     public static class Questionnaire_2 {
@@ -26,6 +33,12 @@ public final class TestQuestionnaireData {
                 ImmutablePair.of(TestQuestionData.QUESTION_3, StringUtils.EMPTY),
                 ImmutablePair.of(TestQuestionData.QUESTION_4, StringUtils.EMPTY)
         );
+        public static final Questionnaire entity(){
+            return Questionnaire.builder()
+                    .user(USER)
+                    .candidateQuestions(candidateQuestions)
+                    .build();
+        }
     }
 
     public static class Questionnaire_3 {
@@ -35,5 +48,11 @@ public final class TestQuestionnaireData {
                 ImmutablePair.of(TestQuestionData.QUESTION_3, StringUtils.EMPTY),
                 ImmutablePair.of(TestQuestionData.QUESTION_4, StringUtils.EMPTY)
         );
+        public static final Questionnaire entity(){
+            return Questionnaire.builder()
+                    .user(USER)
+                    .candidateQuestions(candidateQuestions)
+                    .build();
+        }
     }
 }

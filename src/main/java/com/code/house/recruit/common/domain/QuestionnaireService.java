@@ -4,16 +4,18 @@ import com.code.house.recruit.common.domain.exceptions.ObjectNotFoundException;
 import com.code.house.recruit.common.nosql.documents.Question;
 import com.code.house.recruit.common.nosql.documents.Questionnaire;
 import com.code.house.recruit.common.nosql.documents.User;
+import com.code.house.recruit.common.nosql.repos.QuestionRepo;
 import com.code.house.recruit.common.nosql.repos.QuestionnaireRepo;
 import com.code.house.recruit.common.nosql.repos.UserRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
-import java.util.Optional;
 
+@Slf4j
 @Component
 public class QuestionnaireService {
 
@@ -21,16 +23,20 @@ public class QuestionnaireService {
 
     private final QuestionnaireRepo repo;
 
+    private final QuestionRepo questionRepo;
+
     @Autowired
-    public QuestionnaireService(UserRepo userRepo, QuestionnaireRepo questionnaireRepo) {
+    public QuestionnaireService(UserRepo userRepo, QuestionnaireRepo questionnaireRepo, QuestionRepo questionRepo) {
         this.userRepo = userRepo;
         this.repo = questionnaireRepo;
+        this.questionRepo = questionRepo;
     }
 
     @Transactional
-    public Questionnaire createQuestionnaireForUser(String userEmail) {
-        final User candidate = Optional.ofNullable(userRepo.findByEmail(userEmail))
-                .orElseThrow(() -> new ObjectNotFoundException("Could No find User with email: " + userEmail));
+    public Questionnaire createQuestionnaireForUser(String userId) {
+        final User candidate = userRepo.findById(userId)
+                .orElseThrow(() -> new ObjectNotFoundException("Could No find User with id: " + userId));
+        log.info("Create new questionnaire for user {}" , candidate.getEmail());
         Questionnaire newQuestionnaireForCandidate = Questionnaire.builder()
                 .user(candidate)
                 .build();
@@ -38,12 +44,16 @@ public class QuestionnaireService {
     }
 
     @Transactional
-    public void addQuestions(String questionnaireId, Question question, String candidateAnswer) {
+    public void addQuestions(String questionnaireId, String questionId, String candidateAnswer) {
+        Objects.requireNonNull(questionnaireId, "Questionnaire is required");
+        Objects.requireNonNull(questionId, "Question is required");
+        Objects.requireNonNull(candidateAnswer, "Answer is required");
+
         Questionnaire questionnaire = repo.findById(questionnaireId)
                 .orElseThrow(() -> new ObjectNotFoundException("Could not find questionnaire with id: " + questionnaireId));
+        Question question = questionRepo.findById(questionId)
+                .orElseThrow(() -> new ObjectNotFoundException("Could not find question with id: " + questionId));
 
-        Objects.requireNonNull(question, "Question is required");
-        Objects.requireNonNull(candidateAnswer, "Answer is required");
 
         ImmutablePair<Question, String> pair = new ImmutablePair<>(question, candidateAnswer);
         questionnaire.getCandidateQuestions().add(pair);

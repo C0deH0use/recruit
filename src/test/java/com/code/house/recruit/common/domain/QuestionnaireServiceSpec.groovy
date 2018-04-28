@@ -7,6 +7,7 @@ import com.code.house.recruit.common.nosql.documents.Questionnaire
 import com.code.house.recruit.common.nosql.documents.User
 import com.code.house.recruit.common.nosql.documents.enums.QuestionCategory
 import com.code.house.recruit.common.nosql.documents.enums.QuestionDifficulty
+import com.code.house.recruit.common.nosql.repos.QuestionRepo
 import com.code.house.recruit.common.nosql.repos.QuestionnaireRepo
 import com.code.house.recruit.common.nosql.repos.UserRepo
 import org.joda.time.DateTime
@@ -18,6 +19,8 @@ import spock.lang.Specification
 @SpringBootTest(classes = RecruitApplication.class)
 class QuestionnaireServiceSpec extends Specification {
 
+
+    private static final String CANDIDATE_ID = "newuser1"
     private static final String CANDIDATE_EMAIL = "canA@new.pl"
     private static final String NON_EXISTING_CANDIDATE_EMAIL = "non-existing@user.pl"
 
@@ -25,12 +28,16 @@ class QuestionnaireServiceSpec extends Specification {
     private UserRepo userRepo
 
     @Autowired
+    private QuestionRepo questionRepo;
+
+    @Autowired
     private QuestionnaireRepo repo
 
     @Autowired
     private QuestionnaireService sut
 
-    private static User newUser = User.builder()
+    private User newUser = User.builder()
+            .id(CANDIDATE_ID)
             .firstName("Candidate")
             .lastName("A")
             .status(User.Status.ACTIVE)
@@ -39,13 +46,12 @@ class QuestionnaireServiceSpec extends Specification {
 
     void "should create new questionnaire for candidate"() {
         given:
-        userRepo.save(newUser)
-        String userId = userRepo.findByEmail(CANDIDATE_EMAIL).id
-        assert userId
+        String newUserId = userRepo.save(newUser).id
+        assert newUserId == CANDIDATE_ID
 
         when:
-        sut.createQuestionnaireForUser(CANDIDATE_EMAIL)
-        List<Questionnaire> questionnaires = repo.findByUserEmail(CANDIDATE_EMAIL)
+        sut.createQuestionnaireForUser(newUserId)
+        List<Questionnaire> questionnaires = repo.findByUserId(newUserId)
 
         then:
         questionnaires.size() == 1
@@ -54,11 +60,11 @@ class QuestionnaireServiceSpec extends Specification {
 
     void "should add new questionnarie for given candidate"() {
         given:
-        assert repo.findByUserEmail(CANDIDATE_EMAIL).size() == 1
+        assert repo.findByUserId(CANDIDATE_ID).size() == 1
 
         when:
-        sut.createQuestionnaireForUser(CANDIDATE_EMAIL)
-        def questionnaires = repo.findByUserEmail(CANDIDATE_EMAIL)
+        sut.createQuestionnaireForUser(CANDIDATE_ID)
+        List<Questionnaire> questionnaires = repo.findByUserId(CANDIDATE_ID)
 
         then:
         questionnaires.size() == 2
@@ -75,18 +81,19 @@ class QuestionnaireServiceSpec extends Specification {
 
     void "should add question without any candidate answer"() {
         given:
-        String givenQuestionnaireId = repo.findByUserEmail(CANDIDATE_EMAIL).get(0).id
-        Question givenQuestion = Question.builder()
+        String givenQuestionnaireId = repo.findByUserId(CANDIDATE_ID).get(0).id
+        Question question = Question.builder()
                 .category(QuestionCategory.IT_BASICS)
                 .difficulty(QuestionDifficulty.Junior)
                 .question("Question_String")
                 .answer("Answer for question")
                 .hint("Question hints")
                 .build()
+        String givenQuestionId = questionRepo.save(question).id
 
         when:
-        sut.addQuestions(givenQuestionnaireId, givenQuestion, "")
-        def questionnaire = repo.findById(givenQuestionnaireId)
+        sut.addQuestions(givenQuestionnaireId, givenQuestionId, "")
+        Optional<Questionnaire> questionnaire = repo.findById(givenQuestionnaireId)
 
         then:
         questionnaire.isPresent()
@@ -94,9 +101,12 @@ class QuestionnaireServiceSpec extends Specification {
     }
 
     void "should throw exception if no questionnaire found"() {
+        given:
+        String NON_EXISTING_QUESTION_ID = "Non-existing_id"
         String NON_EXISTING_QUESTIONNAIRE_ID = "Non-existing_id"
+
         when:
-        sut.addQuestions(NON_EXISTING_QUESTIONNAIRE_ID, null, null)
+        sut.addQuestions(NON_EXISTING_QUESTIONNAIRE_ID, NON_EXISTING_QUESTION_ID, "")
 
         then:
         thrown ObjectNotFoundException
@@ -104,10 +114,10 @@ class QuestionnaireServiceSpec extends Specification {
 
     void "should throw exception if question is null"() {
         given:
-        String givenQuestionnaireId = repo.findByUserEmail(CANDIDATE_EMAIL).get(0).id
+        String givenQuestionnaireId = repo.findByUserId(CANDIDATE_ID).get(0).id
 
         when:
-        sut.addQuestions(givenQuestionnaireId, null, null)
+        sut.addQuestions(givenQuestionnaireId, null, "")
 
         then:
         thrown NullPointerException
