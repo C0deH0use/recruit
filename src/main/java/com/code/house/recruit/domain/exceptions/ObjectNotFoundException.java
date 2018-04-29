@@ -1,4 +1,4 @@
-package com.code.house.recruit.common.domain.exceptions;
+package com.code.house.recruit.domain.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 

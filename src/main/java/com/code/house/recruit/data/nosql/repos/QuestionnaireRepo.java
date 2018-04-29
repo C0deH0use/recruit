@@ -1,6 +1,6 @@
-package com.code.house.recruit.common.nosql.repos;
+package com.code.house.recruit.data.nosql.repos;
 
-import com.code.house.recruit.common.nosql.documents.Questionnaire;
+import com.code.house.recruit.data.nosql.documents.Questionnaire;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

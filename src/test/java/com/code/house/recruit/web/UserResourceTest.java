@@ -1,7 +1,7 @@
 package com.code.house.recruit.web;
 
-import com.code.house.recruit.common.nosql.documents.User;
-import com.code.house.recruit.common.nosql.repos.UserRepo;
+import com.code.house.recruit.data.nosql.documents.User;
+import com.code.house.recruit.data.nosql.repos.UserRepo;
 import com.code.house.recruit.common.testdata.TestUserData.USER_1;
 import com.code.house.recruit.common.testdata.TestUserData.USER_2;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,7 +51,7 @@ public class UserResourceTest {
                     .contentType(MediaType.APPLICATION_JSON)
                     .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$._embedded.users", hasSize(1)));
+                .andExpect(jsonPath("$.content", hasSize(1)));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class UserResourceTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$._embedded.users", hasSize(2)));
+                .andExpect(jsonPath("$.content", hasSize(2)));
     }
 
     @Test

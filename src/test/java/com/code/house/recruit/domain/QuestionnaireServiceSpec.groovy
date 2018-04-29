@@ -1,15 +1,16 @@
-package com.code.house.recruit.common.domain
+package com.code.house.recruit.domain
 
 import com.code.house.recruit.RecruitApplication
-import com.code.house.recruit.common.domain.exceptions.ObjectNotFoundException
-import com.code.house.recruit.common.nosql.documents.Question
-import com.code.house.recruit.common.nosql.documents.Questionnaire
-import com.code.house.recruit.common.nosql.documents.User
-import com.code.house.recruit.common.nosql.documents.enums.QuestionCategory
-import com.code.house.recruit.common.nosql.documents.enums.QuestionDifficulty
-import com.code.house.recruit.common.nosql.repos.QuestionRepo
-import com.code.house.recruit.common.nosql.repos.QuestionnaireRepo
-import com.code.house.recruit.common.nosql.repos.UserRepo
+import com.code.house.recruit.domain.exceptions.ObjectNotFoundException
+import com.code.house.recruit.data.nosql.documents.Question
+import com.code.house.recruit.data.nosql.documents.Questionnaire
+import com.code.house.recruit.data.nosql.documents.User
+import com.code.house.recruit.data.nosql.documents.enums.QuestionCategory
+import com.code.house.recruit.data.nosql.documents.enums.QuestionDifficulty
+import com.code.house.recruit.data.nosql.repos.QuestionRepo
+import com.code.house.recruit.data.nosql.repos.QuestionnaireRepo
+import com.code.house.recruit.data.nosql.repos.UserRepo
+import com.code.house.recruit.domain.service.QuestionnaireService
 import org.joda.time.DateTime
 import org.joda.time.Minutes
 import org.springframework.beans.factory.annotation.Autowired
@@ -92,7 +93,7 @@ class QuestionnaireServiceSpec extends Specification {
         String givenQuestionId = questionRepo.save(question).id
 
         when:
-        sut.addQuestions(givenQuestionnaireId, givenQuestionId, "")
+        sut.addQuestions(givenQuestionnaireId, givenQuestionId, null)
         Optional<Questionnaire> questionnaire = repo.findById(givenQuestionnaireId)
 
         then:
@@ -106,7 +107,7 @@ class QuestionnaireServiceSpec extends Specification {
         String NON_EXISTING_QUESTIONNAIRE_ID = "Non-existing_id"
 
         when:
-        sut.addQuestions(NON_EXISTING_QUESTIONNAIRE_ID, NON_EXISTING_QUESTION_ID, "")
+        sut.addQuestions(NON_EXISTING_QUESTIONNAIRE_ID, NON_EXISTING_QUESTION_ID, null)
 
         then:
         thrown ObjectNotFoundException
@@ -117,7 +118,7 @@ class QuestionnaireServiceSpec extends Specification {
         String givenQuestionnaireId = repo.findByUserId(CANDIDATE_ID).get(0).id
 
         when:
-        sut.addQuestions(givenQuestionnaireId, null, "")
+        sut.addQuestions(givenQuestionnaireId, null, null)
 
         then:
         thrown NullPointerException

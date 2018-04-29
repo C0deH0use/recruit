@@ -1,4 +1,4 @@
-package com.code.house.recruit.common.nosql.documents.enums;
+package com.code.house.recruit.data.nosql.documents.enums;
 
 public enum QuestionDifficulty {
     Junior,

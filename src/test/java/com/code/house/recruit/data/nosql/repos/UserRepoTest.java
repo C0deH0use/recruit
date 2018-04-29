@@ -1,23 +1,23 @@
-package com.code.house.recruit.common.nosql.repos;
+package com.code.house.recruit.data.nosql.repos;
 
 
-import com.code.house.recruit.common.nosql.documents.User;
+import com.code.house.recruit.data.nosql.documents.User;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.code.house.recruit.common.nosql.documents.User.builder;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataMongoTest
 @RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class UserRepoTest {
+
     @Autowired
     private MongoTemplate template;
 
@@ -32,19 +32,21 @@ public class UserRepoTest {
         template.createCollection(User.class, CollectionOptions.empty().size(1024 * 1024).maxDocuments(100).capped());
 
         repo.saveAll(
-                Lists.newArrayList(builder()
+                Lists.newArrayList(
+                        User.builder()
                                 .email("info@code-house.pl")
                                 .firstName("Mms")
                                 .lastName("YouKnowWho")
                                 .status(User.Status.ACTIVE)
                                 .build(),
-                        builder()
+                        User.builder()
                                 .email("Aga@poczta.pl")
                                 .firstName("Aga")
                                 .lastName("Konopka")
                                 .status(User.Status.ACTIVE)
-                                .build()));
-
+                                .build()
+                )
+        );
     }
 
     @Test

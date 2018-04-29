@@ -1,10 +1,10 @@
 package com.code.house.recruit.web
 
-import com.code.house.recruit.common.nosql.documents.Questionnaire
-import com.code.house.recruit.common.nosql.documents.User
-import com.code.house.recruit.common.nosql.repos.QuestionRepo
-import com.code.house.recruit.common.nosql.repos.QuestionnaireRepo
-import com.code.house.recruit.common.nosql.repos.UserRepo
+import com.code.house.recruit.data.nosql.documents.Questionnaire
+import com.code.house.recruit.data.nosql.documents.User
+import com.code.house.recruit.data.nosql.repos.QuestionRepo
+import com.code.house.recruit.data.nosql.repos.QuestionnaireRepo
+import com.code.house.recruit.data.nosql.repos.UserRepo
 import com.code.house.recruit.common.testdata.TestQuestionData
 import com.code.house.recruit.common.testdata.TestQuestionnaireData
 import com.code.house.recruit.common.testdata.TestUserData
@@ -48,8 +48,6 @@ class QuestionnaireResourceSpec extends Specification {
 
     @Shared
     private String question1_id
-    @Shared
-    private String question1_Id
 
     def Questionnaire() {
         mapper.registerModule(new JodaModule())
@@ -108,10 +106,10 @@ class QuestionnaireResourceSpec extends Specification {
 
     void "should only create questionnaires for existing user"() {
         given:
-        def nonExistingUserEmail = TestUserData.USER_3.email
+        def nonExistingUserId = TestUserData.USER_2.id
 
         when:
-        def performPostAction = mvcMock.perform(MockMvcRequestBuilders.post("/questionnaire/" + nonExistingUserEmail)
+        def performPostAction = mvcMock.perform(MockMvcRequestBuilders.post("/questionnaire/" + nonExistingUserId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
 
@@ -166,7 +164,7 @@ class QuestionnaireResourceSpec extends Specification {
         NewCandidateQuestionPair requestParam = NewCandidateQuestionPair
                 .builder()
                 .answer(candidateAnswer)
-                .questionId(question1_Id)
+                .questionId(question1_id)
                 .build()
 
         when:

@@ -1,8 +1,8 @@
 package com.code.house.recruit.common.testdata;
 
-import com.code.house.recruit.common.nosql.documents.Question;
-import com.code.house.recruit.common.nosql.documents.enums.QuestionCategory;
-import com.code.house.recruit.common.nosql.documents.enums.QuestionDifficulty;
+import com.code.house.recruit.data.nosql.documents.Question;
+import com.code.house.recruit.data.nosql.documents.enums.QuestionCategory;
+import com.code.house.recruit.data.nosql.documents.enums.QuestionDifficulty;
 
 public class TestQuestionData {
     public static Question QUESTION_1 = Question.builder()

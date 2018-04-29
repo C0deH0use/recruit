@@ -1,4 +1,4 @@
-package com.code.house.recruit.common.nosql.documents;
+package com.code.house.recruit.data.nosql.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

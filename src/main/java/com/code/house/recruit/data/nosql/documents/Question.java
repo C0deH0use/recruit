@@ -1,7 +1,7 @@
-package com.code.house.recruit.common.nosql.documents;
+package com.code.house.recruit.data.nosql.documents;
 
-import com.code.house.recruit.common.nosql.documents.enums.QuestionCategory;
-import com.code.house.recruit.common.nosql.documents.enums.QuestionDifficulty;
+import com.code.house.recruit.data.nosql.documents.enums.QuestionCategory;
+import com.code.house.recruit.data.nosql.documents.enums.QuestionDifficulty;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;

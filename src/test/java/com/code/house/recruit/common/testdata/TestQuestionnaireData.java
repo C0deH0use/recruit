@@ -1,8 +1,8 @@
 package com.code.house.recruit.common.testdata;
 
-import com.code.house.recruit.common.nosql.documents.Question;
-import com.code.house.recruit.common.nosql.documents.Questionnaire;
-import com.code.house.recruit.common.nosql.documents.User;
+import com.code.house.recruit.data.nosql.documents.Question;
+import com.code.house.recruit.data.nosql.documents.Questionnaire;
+import com.code.house.recruit.data.nosql.documents.User;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;

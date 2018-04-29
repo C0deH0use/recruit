@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.1.BUILD-SNAPSHOT'
+		springBootVersion = '2.1.0.BUILD-SNAPSHOT'
 	}
 	repositories {
 		mavenCentral()
@@ -16,6 +16,8 @@ apply plugin: 'idea'
 apply plugin: 'groovy'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'pmd'
 
 group = 'com.code.house'
 version = '0.0.1-SNAPSHOT'
@@ -56,4 +58,28 @@ dependencies {
 	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
 	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
 
+}
+
+pmd {
+	ignoreFailures = false
+	pmdTest.enabled = true
+	ruleSets = [
+			'java-basic',
+			'java-braces',
+			'java-clone',
+			'java-codesize',
+			'java-comments',
+			'java-controversial',
+			'java-coupling',
+			'java-design',
+			'java-empty',
+			'java-finalizers',
+			'java-imports',
+			'java-optimizations',
+			'java-strictexception',
+			'java-strings',
+			'java-typeresolution',
+			'java-unnecessary',
+			'java-unusedcode'
+	]
 }

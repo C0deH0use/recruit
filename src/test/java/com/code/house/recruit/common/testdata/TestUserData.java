@@ -1,6 +1,6 @@
 package com.code.house.recruit.common.testdata;
 
-import com.code.house.recruit.common.nosql.documents.User;
+import com.code.house.recruit.data.nosql.documents.User;
 
 public class TestUserData {
     public static class USER_1 {

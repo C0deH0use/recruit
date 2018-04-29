@@ -1,12 +1,10 @@
 package com.code.house.recruit.web;
 
 
-import com.code.house.recruit.common.domain.QuestionnaireService;
-import com.code.house.recruit.common.domain.exceptions.ObjectNotFoundException;
-import com.code.house.recruit.common.nosql.documents.Questionnaire;
-import com.code.house.recruit.common.nosql.repos.QuestionRepo;
-import com.code.house.recruit.common.nosql.repos.QuestionnaireRepo;
-import com.code.house.recruit.common.nosql.repos.UserRepo;
+import com.code.house.recruit.domain.service.QuestionnaireService;
+import com.code.house.recruit.domain.exceptions.ObjectNotFoundException;
+import com.code.house.recruit.data.nosql.documents.Questionnaire;
+import com.code.house.recruit.data.nosql.repos.QuestionnaireRepo;
 import com.code.house.recruit.web.reqres.NewCandidateQuestionPair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,12 +32,6 @@ public class QuestionnaireResource {
 
     @Autowired
     private QuestionnaireRepo repository;
-
-    @Autowired
-    private QuestionRepo questionRepo;
-
-    @Autowired
-    private UserRepo userRepo;
 
     @GetMapping
     @ResponseBody
