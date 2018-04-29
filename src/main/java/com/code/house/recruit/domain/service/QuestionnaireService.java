@@ -1,4 +1,4 @@
-package com.code.house.recruit.domain;
+package com.code.house.recruit.domain.service;
 
 import com.code.house.recruit.domain.exceptions.ObjectNotFoundException;
 import com.code.house.recruit.data.nosql.documents.Question;
