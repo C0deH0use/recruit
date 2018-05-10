@@ -1,9 +1,9 @@
 package com.code.house.recruit.web;
 
-import com.code.house.recruit.data.nosql.documents.User;
-import com.code.house.recruit.data.nosql.repos.UserRepo;
 import com.code.house.recruit.common.testdata.TestUserData.USER_1;
 import com.code.house.recruit.common.testdata.TestUserData.USER_2;
+import com.code.house.recruit.data.nosql.documents.User;
+import com.code.house.recruit.data.nosql.repos.UserRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -48,8 +48,8 @@ public class UserResourceTest {
     @Test
     public void test_1_ShouldGetUsers() throws Exception {
         mockMvc.perform(get("/users")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(1)));
     }
@@ -57,8 +57,8 @@ public class UserResourceTest {
     @Test
     public void test_2_ShouldReturnGivenUserById() throws Exception {
         mockMvc.perform(get("/users/" + test_user.getId())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email", equalToIgnoringCase(test_user.getEmail())))
                 .andExpect(jsonPath("$.firstName", equalToIgnoringCase(test_user.getFirstName())))

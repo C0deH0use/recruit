@@ -1,13 +1,18 @@
 buildscript {
 	ext {
 		springBootVersion = '2.1.0.BUILD-SNAPSHOT'
+		junitPlatformVersion = '1.1.1'
+		junitJupiterVersion  = '5.2.0'
 	}
 	repositories {
 		mavenCentral()
 		maven { url 'https://repo.spring.io/libs-snapshot' }
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+	}
+	dependencies {
+		classpath "org.junit.platform:junit-platform-gradle-plugin:${junitPlatformVersion}"
 	}
 }
 
@@ -16,12 +21,16 @@ apply plugin: 'idea'
 apply plugin: 'groovy'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 apply plugin: 'pmd'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
 
 group = 'com.code.house'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
@@ -54,32 +63,42 @@ dependencies {
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 	testCompile 'org.springframework.security:spring-security-test'
 
+	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+
 	testCompile 'org.codehaus.groovy:groovy-all:2.4.14'
 	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
 	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
 
 }
 
+test {
+	useJUnitPlatform {
+		excludeTags 'integration', 'nightly'
+	}
+}
+
+task integrationTest(type: Test){
+	group = LifecycleBasePlugin.VERIFICATION_GROUP
+	useJUnitPlatform {
+		includeTags 'integration'
+	}
+}
+
 pmd {
 	ignoreFailures = false
-	pmdTest.enabled = true
-	ruleSets = [
-			'java-basic',
-			'java-braces',
-			'java-clone',
-			'java-codesize',
-			'java-comments',
-			'java-controversial',
-			'java-coupling',
-			'java-design',
-			'java-empty',
-			'java-finalizers',
-			'java-imports',
-			'java-optimizations',
-			'java-strictexception',
-			'java-strings',
-			'java-typeresolution',
-			'java-unnecessary',
-			'java-unusedcode'
-	]
+	ruleSetFiles = files("pmdRules.xml")
+}
+
+findbugs {
+	excludeFilter = file("findbugs_excludes.xml")
+}
+
+checkstyle {
+	toolVersion = "8.10"
+	configFile = file("checkstyle.xml")
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '4.7'
 }

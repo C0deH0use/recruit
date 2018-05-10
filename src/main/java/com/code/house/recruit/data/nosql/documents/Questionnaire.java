@@ -31,6 +31,7 @@ public class Questionnaire implements Persistable<String> {
     private User user;
     private String additionalNotes;
     @Builder.Default
+    @SuppressWarnings("PMD.ImmutableField")
     private Set<ImmutablePair<Question, String>> candidateQuestions = new HashSet();
 
     @Override

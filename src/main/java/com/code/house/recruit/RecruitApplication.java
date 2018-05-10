@@ -8,6 +8,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
+@SuppressWarnings("PMD.UseUtilityClass")
 @Import(value = {WebConfig.class, ServiceDomainConfig.class, DataConfig.class})
 public class RecruitApplication {
     public static void main(String[] args) {

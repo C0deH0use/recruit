@@ -3,15 +3,20 @@ package com.code.house.recruit.common.testdata;
 import com.code.house.recruit.data.nosql.documents.User;
 
 public class TestUserData {
-    public static class USER_1 {
+    private TestUserData() {
+    }
+
+    public static final class USER_1 {
         public static final String id = "user1";
         public static final String firstName = "Name A";
         public static final String lastName = "LastName A";
-
         public static final String email = "name_a@gmail.com";
         public static final User.Status status = User.Status.ACTIVE;
 
-        public static final User build() {
+        private USER_1() {
+        }
+
+        public static User build() {
             return User.builder()
                     .id(id)
                     .firstName(firstName)
@@ -22,6 +27,7 @@ public class TestUserData {
         }
 
     }
+
     public static class USER_2 {
         public static final String id = "user2";
         public static final String firstName = "Name B";
@@ -29,7 +35,10 @@ public class TestUserData {
         public static final String email = "name_b@gmail.com";
         public static final User.Status status = User.Status.ACTIVE;
 
-        public static final User build() {
+        private USER_2() {
+        }
+
+        public static User build() {
             return User.builder()
                     .id(id)
                     .firstName(firstName)
@@ -44,11 +53,13 @@ public class TestUserData {
         public static final String id = "user3";
         public static final String firstName = "Name C";
         public static final String lastName = "LastName c";
-
         public static final String email = "name_c@gmail.com";
         public static final User.Status status = User.Status.ACTIVE;
 
-        public static final User build() {
+        private USER_3() {
+        }
+
+        public static User build() {
             return User.builder()
                     .id(id)
                     .firstName(firstName)
