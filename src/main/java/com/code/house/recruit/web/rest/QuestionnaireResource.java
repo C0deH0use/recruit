@@ -1,11 +1,11 @@
-package com.code.house.recruit.web;
+package com.code.house.recruit.web.rest;
 
 
 import com.code.house.recruit.domain.service.QuestionnaireService;
 import com.code.house.recruit.domain.exceptions.ObjectNotFoundException;
 import com.code.house.recruit.data.nosql.documents.Questionnaire;
 import com.code.house.recruit.data.nosql.repos.QuestionnaireRepo;
-import com.code.house.recruit.web.reqres.NewCandidateQuestionPair;
+import com.code.house.recruit.web.rest.reqres.NewCandidateQuestionPair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package com.code.house.recruit.web.error;
+package com.code.house.recruit.web.rest.error;
 
 import com.code.house.recruit.domain.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpHeaders;

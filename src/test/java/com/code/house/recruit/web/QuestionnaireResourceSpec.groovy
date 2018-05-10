@@ -8,7 +8,7 @@ import com.code.house.recruit.data.nosql.repos.UserRepo
 import com.code.house.recruit.common.testdata.TestQuestionData
 import com.code.house.recruit.common.testdata.TestQuestionnaireData
 import com.code.house.recruit.common.testdata.TestUserData
-import com.code.house.recruit.web.reqres.NewCandidateQuestionPair
+import com.code.house.recruit.web.rest.reqres.NewCandidateQuestionPair
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.joda.JodaModule
 import org.springframework.beans.factory.annotation.Autowired

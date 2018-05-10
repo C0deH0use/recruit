@@ -1,20 +1,23 @@
 package com.code.house.recruit.data.nosql.repos;
 
 
+import com.code.house.recruit.common.tags.Integration;
 import com.code.house.recruit.data.nosql.documents.User;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+@Integration
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class UserRepoTest {
 
@@ -50,13 +53,15 @@ public class UserRepoTest {
     }
 
     @Test
+    @DisplayName("Check repository count")
     public void test1() {
         assertThat(repo.count()).isEqualTo(2);
     }
 
 
     @Test
-    public void shouldSuccessfullyFindUserByEmail(){
+    @DisplayName("Should successfully  find user with email")
+    public void shouldSuccessfullyFindUserByEmail() {
         assertThat(repo.findByEmail("info@code-house.pl")).isNotNull();
     }
 }

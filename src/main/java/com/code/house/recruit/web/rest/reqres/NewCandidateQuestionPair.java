@@ -1,4 +1,4 @@
-package com.code.house.recruit.web.reqres;
+package com.code.house.recruit.web.rest.reqres;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
