@@ -1,7 +1,6 @@
 package com.code.house.recruit.domain
 
 import com.code.house.recruit.RecruitApplication
-import com.code.house.recruit.domain.exceptions.ObjectNotFoundException
 import com.code.house.recruit.data.nosql.documents.Question
 import com.code.house.recruit.data.nosql.documents.Questionnaire
 import com.code.house.recruit.data.nosql.documents.User
@@ -10,6 +9,7 @@ import com.code.house.recruit.data.nosql.documents.enums.QuestionDifficulty
 import com.code.house.recruit.data.nosql.repos.QuestionRepo
 import com.code.house.recruit.data.nosql.repos.QuestionnaireRepo
 import com.code.house.recruit.data.nosql.repos.UserRepo
+import com.code.house.recruit.domain.exceptions.ObjectNotFoundException
 import com.code.house.recruit.domain.service.QuestionnaireService
 import org.joda.time.DateTime
 import org.joda.time.Minutes

@@ -1,19 +1,19 @@
 buildscript {
-	ext {
-		springBootVersion = '2.1.0.BUILD-SNAPSHOT'
-		junitPlatformVersion = '1.1.1'
-		junitJupiterVersion  = '5.2.0'
-	}
-	repositories {
-		mavenCentral()
-		maven { url 'https://repo.spring.io/libs-snapshot' }
-	}
-	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-	}
-	dependencies {
-		classpath "org.junit.platform:junit-platform-gradle-plugin:${junitPlatformVersion}"
-	}
+    ext {
+        springBootVersion = '2.1.0.BUILD-SNAPSHOT'
+        junitPlatformVersion = '1.1.1'
+        junitJupiterVersion = '5.2.0'
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+    dependencies {
+        classpath "org.junit.platform:junit-platform-gradle-plugin:${junitPlatformVersion}"
+    }
 }
 
 apply plugin: 'java'
@@ -33,72 +33,72 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-	mavenCentral()
-	maven { url "https://repo.spring.io/snapshot" }
-	maven { url "https://repo.spring.io/milestone" }
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
 }
 
 dependencies {
-	compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
 //	compile 'org.springframework.boot:spring-boot-starter-security'
-	compile 'org.springframework.boot:spring-boot-starter-web'
-	compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
 
-	compile 'org.apache.commons:commons-lang3:3.7'
-	compile 'org.apache.commons:commons-collections4:4.1'
+    compile 'org.apache.commons:commons-lang3:3.7'
+    compile 'org.apache.commons:commons-collections4:4.1'
 
-	compile 'com.google.guava:guava:23.0'
-	compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.5'
+    compile 'com.google.guava:guava:23.0'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.5'
 
-	compile 'joda-time:joda-time:2.9.9'
+    compile 'joda-time:joda-time:2.9.9'
 
 
-	compileOnly 'org.projectlombok:lombok'
-	testCompileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
 
-	testCompile 'io.projectreactor:reactor-test'
-	testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.1'
-	testCompile 'cz.jirutka.spring:embedmongo-spring:1.3.1'
+    testCompile 'io.projectreactor:reactor-test'
+    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:2.0.1'
+    testCompile 'cz.jirutka.spring:embedmongo-spring:1.3.1'
 
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
-	testCompile 'org.springframework.security:spring-security-test'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.security:spring-security-test'
 
-	testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
-	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
 
-	testCompile 'org.codehaus.groovy:groovy-all:2.4.14'
-	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
-	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
+    testCompile 'org.codehaus.groovy:groovy-all:2.4.14'
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
 
 }
 
 test {
-	useJUnitPlatform {
-		excludeTags 'integration', 'nightly'
-	}
+    useJUnitPlatform {
+        excludeTags 'integration', 'nightly'
+    }
 }
 
-task integrationTest(type: Test){
-	group = LifecycleBasePlugin.VERIFICATION_GROUP
-	useJUnitPlatform {
-		includeTags 'integration'
-	}
+task integrationTest(type: Test) {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    useJUnitPlatform {
+        includeTags 'integration'
+    }
 }
 
 pmd {
-	ignoreFailures = false
-	ruleSetFiles = files("pmdRules.xml")
+    ignoreFailures = false
+    ruleSetFiles = files("pmdRules.xml")
 }
 
 findbugs {
-	excludeFilter = file("findbugs_excludes.xml")
+    excludeFilter = file("findbugs_excludes.xml")
 }
 
 checkstyle {
-	toolVersion = "8.10"
-	configFile = file("checkstyle.xml")
+    toolVersion = "8.10"
+    configFile = file("checkstyle.xml")
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.7'
+    gradleVersion = '4.7'
 }

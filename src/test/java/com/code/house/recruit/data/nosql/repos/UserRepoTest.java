@@ -53,15 +53,14 @@ public class UserRepoTest {
     }
 
     @Test
-    @DisplayName("Check repository count")
-    public void test1() {
-        assertThat(repo.count()).isEqualTo(2);
-    }
-
-
-    @Test
     @DisplayName("Should successfully  find user with email")
     public void shouldSuccessfullyFindUserByEmail() {
         assertThat(repo.findByEmail("info@code-house.pl")).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Check repository count")
+    public void test1() {
+        assertThat(repo.count()).isEqualTo(2);
     }
 }

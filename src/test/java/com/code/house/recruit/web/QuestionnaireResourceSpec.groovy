@@ -1,13 +1,13 @@
 package com.code.house.recruit.web
 
+import com.code.house.recruit.common.testdata.TestQuestionData
+import com.code.house.recruit.common.testdata.TestQuestionnaireData
+import com.code.house.recruit.common.testdata.TestUserData
 import com.code.house.recruit.data.nosql.documents.Questionnaire
 import com.code.house.recruit.data.nosql.documents.User
 import com.code.house.recruit.data.nosql.repos.QuestionRepo
 import com.code.house.recruit.data.nosql.repos.QuestionnaireRepo
 import com.code.house.recruit.data.nosql.repos.UserRepo
-import com.code.house.recruit.common.testdata.TestQuestionData
-import com.code.house.recruit.common.testdata.TestQuestionnaireData
-import com.code.house.recruit.common.testdata.TestUserData
 import com.code.house.recruit.web.rest.reqres.NewCandidateQuestionPair
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.joda.JodaModule
@@ -137,7 +137,7 @@ class QuestionnaireResourceSpec extends Specification {
 
     }
 
-    void "should add new question to existing questionnaire" (){
+    void "should add new question to existing questionnaire"() {
         given:
         String question1_Id = questionRepo.save(TestQuestionData.QUESTION_1).id
         String candidateAnswer = "Answer to question"
@@ -157,7 +157,7 @@ class QuestionnaireResourceSpec extends Specification {
         patchAction.andExpect(status().isNoContent())
     }
 
-    void "should failed to add question to non existing questionnaire" (){
+    void "should failed to add question to non existing questionnaire"() {
         given:
         String nonExistingQuestionnaireId = "nonExistingQuestionnaireId"
         String candidateAnswer = "Answer to question"

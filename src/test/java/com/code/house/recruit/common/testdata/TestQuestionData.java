@@ -7,11 +7,11 @@ import com.code.house.recruit.data.nosql.documents.enums.QuestionDifficulty;
 public class TestQuestionData {
     public static Question QUESTION_1 = Question.builder()
             .category(QuestionCategory.IT_BASICS)
-                .difficulty(QuestionDifficulty.Junior)
-                .question("Question_String")
-                .answer("Answer for question")
-                .hint("Question hints")
-                .build();
+            .difficulty(QuestionDifficulty.Junior)
+            .question("Question_String")
+            .answer("Answer for question")
+            .hint("Question hints")
+            .build();
 
     public static Question QUESTION_2 = Question.builder()
             .category(QuestionCategory.JAVA)

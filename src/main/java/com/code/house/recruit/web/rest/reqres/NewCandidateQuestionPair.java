@@ -15,5 +15,6 @@ public class NewCandidateQuestionPair {
 
     @NotBlank
     private String questionId;
+
     private String answer;
 }

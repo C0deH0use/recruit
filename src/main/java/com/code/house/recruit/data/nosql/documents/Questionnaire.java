@@ -30,6 +30,7 @@ public class Questionnaire implements Persistable<String> {
     private DateTime createdDate;
     private User user;
     private String additionalNotes;
+
     @Builder.Default
     @SuppressWarnings("PMD.ImmutableField")
     private Set<ImmutablePair<Question, String>> candidateQuestions = new HashSet();
@@ -39,4 +40,3 @@ public class Questionnaire implements Persistable<String> {
         return Objects.isNull(id);
     }
 }
-

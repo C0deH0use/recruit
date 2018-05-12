@@ -2,7 +2,7 @@ package com.code.house.recruit.domain.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 
-    public ObjectNotFoundException(String message) {
+    public ObjectNotFoundException(final String message) {
         super(message);
     }
 }

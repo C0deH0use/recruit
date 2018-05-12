@@ -21,5 +21,4 @@ public class Question {
     private QuestionDifficulty difficulty;
     private QuestionCategory category;
     private String hint;
-
 }
