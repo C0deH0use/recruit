@@ -11,8 +11,8 @@ import { ChangeLogComponent } from "./changelog.component";
 @NgModule({
     imports: [
         CommonModule,
-        ChangeLogRoutingModule,
-        MatchHeightModule
+        MatchHeightModule,
+        ChangeLogRoutingModule
     ],
     exports: [],
     declarations: [ ChangeLogComponent ],

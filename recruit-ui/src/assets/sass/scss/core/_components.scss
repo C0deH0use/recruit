@@ -29,6 +29,9 @@
 
 // List Group
 .list-group-item{
+    &:hover{
+        z-index: 0;
+    }
     &.active, 
     &.active:focus,
     &.active:hover{

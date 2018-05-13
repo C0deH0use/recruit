@@ -7,10 +7,10 @@ import { ContentLayoutPageComponent } from './content-layout-page.component';
 const routes: Routes = [
   {
     path: '',
-     component: ContentLayoutPageComponent,
-    data: {
-      title: 'Content Layout page'
-    },    
+      component: ContentLayoutPageComponent,
+      data: {
+        title: 'Content Layout page'
+      },
   }
 ];
 

@@ -211,3 +211,22 @@ datetime .form-group{
     border-color: theme-color('primary') !important;
   }
 }
+
+.dragdrop-container{
+  min-height: 200px;
+}
+
+.content-overlay{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  display: block;
+  z-index: 2;
+  visibility: hidden;
+  &.show{
+    visibility: visible;
+    background-color: rgba(0,0,0,.6);
+  }
+}

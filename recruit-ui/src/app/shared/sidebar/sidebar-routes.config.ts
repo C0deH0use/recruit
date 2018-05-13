@@ -9,6 +9,9 @@ export const ROUTES: RouteInfo[] = [
         path: '/content-layout', title: 'Content Layout', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
+      path: '/questionnaires', title: 'Questionnaires', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    {
         path: '', title: 'Menu Levels', icon: 'ft-align-left', class: 'has-sub', badge: '1', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false,
         submenu: [
             { path: 'javascript:;', title: 'Second Level', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: true, submenu: [] },

@@ -127,3 +127,20 @@ Fixed
 --------
 User Profile page responsive issue.
 IE 11 issue.
+
+#### `4.2` (2018-03-22)
+***
+Added
+----------
+Top fix navbar option in Angular Starter kit
+
+Updated
+--------
+Angular, NG-bootstrap and other Packages updated to latest version.
+Removed Bourbon package and also from Timeline pages
+
+Fixed
+--------
+Radio button issue in forms pages in angular and HTML template
+HTML template - profile page responsive issue
+File upload issue in upload component and forms page in angular template
