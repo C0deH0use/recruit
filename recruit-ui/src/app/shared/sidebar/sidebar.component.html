@@ -18,12 +18,26 @@
 <!-- Sidebar Header Ends -->
 
 <!-- Sidebar Content starts -->
+<!--<div class="sidebar-content">-->
+    <!--<div class="nav-container">-->
+        <!--<ul class="navigation">-->
+            <!--&lt;!&ndash; First level menu &ndash;&gt;-->
+            <!--<li-->
+              <!--[routerLinkActive]="['active']" class="text">Questionnaires-->
+                <!--<a [routerLink]="'/questionnaires'"></a>-->
+                <!--<a [routerLink]="'/questionnaires/new'"></a>-->
+                <!--&lt;!&ndash;<a [routerLink]="'/questionnaires/:id'"></a>&ndash;&gt;-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+<!--</div>-->
+
 <div class="sidebar-content">
     <div class="nav-container">
         <ul class="navigation">
             <!-- First level menu -->
             <li *ngFor="let menuItem of menuItems" [ngClass]="[menuItem.class]" [routerLinkActive]="menuItem.submenu.length != 0 ? '' : 'active'"
-                [routerLinkActiveOptions]="{exact: true}">
+                [routerLinkActiveOptions]="{exact: !!menuItem.isExactLink}">
                 <a [routerLink]="menuItem.class === '' ? [menuItem.path] : null" *ngIf="!menuItem.isExternalLink; else externalLinkBlock">
                     <i [ngClass]="[menuItem.icon]"></i>
                     <span class="menu-title">{{menuItem.title}}</span>

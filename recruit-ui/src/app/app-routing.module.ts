@@ -9,7 +9,7 @@ import { AuthGuard } from './shared/auth/auth-guard.service';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'questionnaires',
+    redirectTo: '/questionnaires',
     pathMatch: 'full',
   },
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: routes, canActivate: [AuthGuard] },

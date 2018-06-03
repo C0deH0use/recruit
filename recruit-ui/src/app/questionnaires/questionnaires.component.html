@@ -1,12 +1,48 @@
-<div class="row" matchHeight="card">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Questionnaires</h4>
-      </div>
-      <div class="card-body">
-        <div class="card-block">
-          Table here
+<div matchHeight="card">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Questionnaires</h4>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <div class="row">
+              <div class="col-3">
+                <button class="btn btn-raised btn-primary" type="button" (click)="onNewQuestionnaire()">Create New</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <div class="row">
+              <div class="col-12">
+                <mat-table [dataSource]="dataSource">
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef>Questionnaire Id</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="user">
+                    <mat-header-cell *matHeaderCellDef>User name</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.user }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="createdDate">
+                    <mat-header-cell *matHeaderCellDef>Created Date</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.createdDate }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="additionalNotes">
+                    <mat-header-cell *matHeaderCellDef>Additional notes</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.additionalNotes }}</mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                </mat-table>
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

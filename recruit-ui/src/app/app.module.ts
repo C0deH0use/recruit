@@ -11,6 +11,8 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
+import { QuestionnaireService } from "./shared/services/questionnaire.service";
+import { QuestionnairesModule } from "./questionnaires/questionnaires.module";
 
 @NgModule({
     declarations: [
@@ -19,11 +21,13 @@ import { AuthGuard } from './shared/auth/auth-guard.service';
     ],
     imports: [
         BrowserAnimationsModule,
+        QuestionnairesModule,
         AppRoutingModule,
         SharedModule,
         NgbModule.forRoot()
     ],
     providers: [
+        QuestionnaireService,
         AuthService,
         AuthGuard
     ],
