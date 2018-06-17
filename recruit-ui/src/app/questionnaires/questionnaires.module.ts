@@ -1,22 +1,26 @@
-import { NgModule } from '@angular/core';
+import { NgModule }     from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { FormsModule }  from "@angular/forms"
 
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 
-import { QuestionnairesComponent } from "./questionnaires.component";
-import { AddEditQuestionnaireComponent} from "./questionnaire/add-edit-questionnaire.component";
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card'
+import { QuestionnairesComponent }       from "./questionnaires.component";
+import { AddEditQuestionnaireComponent } from "./questionnaire/add-edit-questionnaire.component";
+import { QuestionsModule }               from "../questions/questions.module";
+import { MaterialModule }                from "../shared/material/material.module";
 
-@NgModule({
+@NgModule ({
   imports: [
+    FormsModule,
     CommonModule,
+    MaterialModule,
     MatchHeightModule,
-    MatTableModule,
-    MatCardModule
+    QuestionsModule
   ],
-  declarations: [QuestionnairesComponent,
+  declarations: [
+    QuestionnairesComponent,
     AddEditQuestionnaireComponent
   ]
 })
-export class QuestionnairesModule { }
+export class QuestionnairesModule {
+}

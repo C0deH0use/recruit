@@ -9,11 +9,10 @@ export const ROUTES: RouteInfo[] = [
         path: '/content-layout', title: 'Content Layout', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-      path: '/questionnaires', title: 'Questionnaires', icon: 'ft-square', class: '', badge: '', badgeClass: '', isExactLink: false ,isExternalLink: false, submenu: []
-      // submenu: [
-      //   { path: '/questionnaires/new', title: '', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: true, submenu: [] },
-      //   { path: '/questionnaires/**', title: '', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: true, submenu: [] }
-      // ]
+      path: '/questionnaires', title: 'Questionnaires', icon: 'ft-file', class: '', badge: '', badgeClass: '', isExactLink: false ,isExternalLink: false, submenu: []
+    },
+    {
+      path: '/questions', title: 'Available Questions', icon: 'ft-file', class: '', badge: '', badgeClass: '', isExactLink: false ,isExternalLink: false, submenu: []
     },
     {
         path: '', title: 'Menu Levels', icon: 'ft-align-left', class: 'has-sub', badge: '1', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false,

@@ -7,11 +7,11 @@
           <h4 class="card-subtitle" *ngIf="!isNew">New Questionnaire</h4>
         </div>
         <div class="card-block">
-          <form novalidate id="add-edit-questionnaire-form">
+          <form novalidate name="add-edit-questionnaire-form" >
             <div class="form-row">
               <div class="form-group col-4">
                 <label for="questionnaire-id">Questionnaire Id</label>
-                <input id="questionnaire-id" type="text" readonly="true" class="form-control" ([ngModal])="modal.id">
+                <input id="questionnaire-id" name="questionnaire-id" type="text" class="form-control" [(ngModel)]="modal.id">
               </div>
             </div>
             <div class="row">
@@ -19,43 +19,28 @@
                 <div class="form-row">
                   <div class="form-group col-6">
                     <label for="candidate">User</label>
-                    <input id="candidate" type="text" placeholder="Candidate Name" class="form-control" ([ngModal])="modal.user">
+                    <input id="candidate" name="candidateName" type="text" placeholder="Candidate Name" class="form-control" [(ngModel)]="modal.user">
                   </div>
                   <div class="form-group col-6">
                     <label for="additional-notes">Additional Notes</label>
-                    <input id="additional-notes" type="text" placeholder="Additional Notes..." class="form-control" ([ngModal])="modal.additionalNotes">
+                    <input id="additional-notes" name="additionalNotes" type="text" placeholder="Additional Notes..." class="form-control" [(ngModel)]="modal.additionalNotes">
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row my-2">
+              <div class="col-6 justify-content-start d-flex">
+                 {{modal.id}} - {{modal.user}} | {{modal.additionalNotes}}
+                </div>
+            </div>
+            <div class="row my-2">
               <div class="col-12">
-                <mat-table [dataSource]="dataSource">
-                  <ng-container matColumnDef="candidateAnswer">
-                    <mat-header-cell *matHeaderCellDef>Candidate Answer</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{ row.candidateAnswer }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="question">
-                    <mat-header-cell *matHeaderCellDef>Question</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{ row.question.question }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="question-answer">
-                    <mat-header-cell *matHeaderCellDef>Correct Answer</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{ row.question.answer }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="question-difficulty">
-                    <mat-header-cell *matHeaderCellDef>Question Difficulty</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{ row.question.difficulty }}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="question-category">
-                    <mat-header-cell *matHeaderCellDef>Question Category</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{ row.question.category }}</mat-cell>
-                  </ng-container>
+                <questions [candidateQuestions]="modal.candidateQuestions"></questions>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-2">
 
-                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-                </mat-table>
               </div>
             </div>
           </form>

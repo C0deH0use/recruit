@@ -1,8 +1,8 @@
-import {CandidateQuestion} from "./candidateQuestions.modal";
+import {CandidateQuestion} from "../questions/candidateQuestions.modal";
 
 export class Questionnaire {
   public static newOne(): Questionnaire {
-    return new Questionnaire(null, null, null, null, []);
+    return new Questionnaire(null, null, null, null, null);
   }
   constructor(public id:string, public createdDate: string, public user:string, public additionalNotes:string, public candidateQuestions: CandidateQuestion[]){}
 }

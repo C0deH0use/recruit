@@ -1,31 +1,29 @@
 import {EventEmitter, Injectable} from "@angular/core";
-import {Questionnaire} from "./questionnaire.model";
-import {Observable} from "rxjs/Observable";
-import {Question} from "./question.model";
-import {CandidateQuestion} from "./candidateQuestions.modal";
+import {Questionnaire}            from "../questionnaries/questionnaire.modal";
+import {Observable}               from "rxjs/Observable";
+import {Question}                 from "../questions/question.modal";
+import {CandidateQuestion}        from "../questions/candidateQuestions.modal";
 
 @Injectable()
 export class QuestionnaireService {
-  selected = new EventEmitter<Questionnaire>();
-
   private questionnaires: Questionnaire[];
 
   constructor() {
     this.questionnaires = [
       new Questionnaire("1a", "2018-05-05", "Marek", "", [
-          new CandidateQuestion("Incorrect Answer", new Question("Question 1", "Correct Answer", "Junior", "JAVA")),
-          new CandidateQuestion("Correct Answer ", new Question("Question 2", "Correct Answer", "Junior", "JAVA")),
-          new CandidateQuestion("Correct Answer ", new Question("Question 3", "Correct Answer", "Mid", "JAVA"))
+          new CandidateQuestion("1", "Incorrect Answer", new Question("1", "Question Junior JAVA 1", "Correct Answer", "Junior", "JAVA")),
+          new CandidateQuestion("2", "Correct Answer ", new Question("2", "Question Junior JAVA 2", "Correct Answer", "Junior", "JAVA")),
+          new CandidateQuestion("3", "Correct Answer ", new Question("4", "Question Mid JAVA 1", "Correct Answer", "Mid", "JAVA"))
       ]),
       new Questionnaire("2a", "2018-05-05", "Alek", "", [
-        new CandidateQuestion("Correct Answer", new Question("Question 1", "Correct Answer", "Junior", "JAVA")),
-        new CandidateQuestion("Incorrect Answer ", new Question("Question 2", "Correct Answer", "Mid", "JAVA")),
-        new CandidateQuestion("Correct Answer ", new Question("Question 3", "Correct Answer", "Mid", "JAVA"))
+        new CandidateQuestion("4", "Correct Answer", new Question("1", "Question Junior JAVA 1", "Correct Answer", "Junior", "JAVA")),
+        new CandidateQuestion("5", "Incorrect Answer ", new Question("4", "Question Mid JAVA 1", "Correct Answer", "Mid", "JAVA")),
+        new CandidateQuestion("6", "Correct Answer ", new Question("6", "Question Mid JAVA 2", "Correct Answer", "Mid", "JAVA"))
       ]),
       new Questionnaire("3a", "2018-05-05", "Bartek", "", [
-        new CandidateQuestion("Correct Answer", new Question("Question 1", "Correct Answer", "Junior", "JAVA")),
-        new CandidateQuestion("Incorrect Answer ", new Question("Question 2", "Correct Answer", "Mid", "JAVA")),
-        new CandidateQuestion("Correct Answer ", new Question("Question 3", "Correct Answer", "Mid", "JAVA"))
+        new CandidateQuestion("7", "Correct Answer", new Question("1", "Question Junior JAVA 1", "Correct Answer", "Junior", "JAVA")),
+        new CandidateQuestion("8", "Incorrect Answer ", new Question("4", "Question Mid JAVA 1","Correct Answer", "Mid", "JAVA")),
+        new CandidateQuestion("9", "Correct Answer ", new Question("5", "Question Junior Security 1", "Correct Answer", "Mid", "SECURITY"))
       ]),
       new Questionnaire("4a", "2018-05-05", "Damian", "", null)
     ];

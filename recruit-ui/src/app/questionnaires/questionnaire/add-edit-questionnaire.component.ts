@@ -1,9 +1,9 @@
+import {Component, OnInit, ViewChild} from "@angular/core";
+import {ActivatedRoute, Data} from "@angular/router";
+
+import {Questionnaire}        from "../../shared/questionnaries/questionnaire.modal";
 import {QuestionnaireService} from "../../shared/services/questionnaire.service";
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {Questionnaire} from "../../shared/services/questionnaire.model";
-import {MatTableDataSource} from "@angular/material";
-import {CandidateQuestion} from "../../shared/services/candidateQuestions.modal";
+import {CandidateQuestion}    from "../../shared/questions/candidateQuestions.modal";
 
 @Component({
   selector: 'add-edit-questionnaire',
@@ -11,25 +11,29 @@ import {CandidateQuestion} from "../../shared/services/candidateQuestions.modal"
   styleUrls: ['./add-edit-questionnaire.component.scss']
 })
 export class AddEditQuestionnaireComponent implements OnInit {
+  @ViewChild(CandidateQuestion) questions;
+
   isNew: boolean;
   questionnaireId: string;
   modal: Questionnaire;
-  dataSource: MatTableDataSource<CandidateQuestion>;
-  displayedColumns: string[] = ['candidateAnswer', 'question', 'question-answer', 'question-difficulty', 'question-category'];
 
 
   constructor(private questionnaireService: QuestionnaireService, private activeRoute: ActivatedRoute) {
-      this.questionnaireId = this.activeRoute.snapshot.params["id"];
+      this.activeRoute.data.subscribe((routeData:Data )=> {
+         this.isNew = routeData.isNew;
+
+         if(!this.isNew) {
+           this.questionnaireId = this.activeRoute.snapshot.params["id"];
+         }
+      });
   }
 
   ngOnInit() {
-      this.modal = this.questionnaireId != null ?
-          this.questionnaireService.findById(this.questionnaireId) :
-          Questionnaire.newOne();
+    this.modal =  this.isNew ?
+      Questionnaire.newOne():
+      this.questionnaireService.findById(this.questionnaireId) ;
 
-      this.dataSource = this.modal.candidateQuestions != null ?
-         new MatTableDataSource<CandidateQuestion>(this.modal.candidateQuestions):
-         new MatTableDataSource<CandidateQuestion>();
+
   }
 }
 
