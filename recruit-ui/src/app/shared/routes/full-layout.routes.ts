@@ -13,7 +13,7 @@ export const routes: Routes = [
   {
     path: 'questionnaires', children: [
       { path: '', component: QuestionnairesComponent },
-      { path: 'id/:id', data: { isNew: false }, component: AddEditQuestionnaireComponent },
+      { path: ':id', data: { isNew: false }, component: AddEditQuestionnaireComponent },
       { path: 'new', data: { isNew: true },  component: AddEditQuestionnaireComponent },
     ]
   },

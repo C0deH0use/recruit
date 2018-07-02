@@ -40,6 +40,6 @@ export class QuestionnairesComponent implements OnInit, AfterViewInit {
   }
 
   onNavigateToDetails(questionnaireId: string) {
-    this.router.navigate(['id', questionnaireId], {relativeTo: this.activeRoute});
+    this.router.navigate([questionnaireId], {relativeTo: this.activeRoute});
   }
 }

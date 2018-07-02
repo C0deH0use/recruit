@@ -3,7 +3,7 @@ import { MatSort, MatSortHeaderIntl, MatTableDataSource }     from "@angular/mat
 import { CandidateQuestion }                                  from "../shared/questions/candidateQuestions.modal";
 import { QuestionService }                                    from "../shared/services/question.service";
 // import { Question }                                       from "../shared/questions/question.modal";
-import { Router }                                             from "@angular/router";
+import { ActivatedRoute, Data, Router }                       from "@angular/router";
 
 @Component ({
   selector: 'questions',
@@ -12,12 +12,13 @@ import { Router }                                             from "@angular/rou
 })
 export class QuestionsComponent implements OnInit , AfterViewInit {
   @ViewChild (MatSort) sort: MatSort;
+  @Input () questionnaireId: string;
   @Input () candidateQuestions: CandidateQuestion[];
-
+  private inQuestionnaire : boolean = false;
   dataSource: MatTableDataSource<CandidateQuestion>;
   displayedColumns: string[] = [ 'question-edit', 'questionText', 'answer', 'difficulty', 'category' ];
 
-  constructor (private questionService: QuestionService, private router: Router) {
+  constructor (private questionService: QuestionService, private router: Router,  private activeRoute: ActivatedRoute) {
   }
 
   ngOnInit () {
@@ -25,14 +26,21 @@ export class QuestionsComponent implements OnInit , AfterViewInit {
       this.dataSource = new MatTableDataSource<CandidateQuestion> (this.candidateQuestions);
       this.displayedColumns.push ('candidateAnswer');
     } else {
-      this.questionService.getQuestions ()
-        .subscribe (questions => {
-          let newDS: CandidateQuestion[] = [];
-          for (let q of questions) {
-            newDS.push (new CandidateQuestion ("", "", q));
-          }
-          this.dataSource = new MatTableDataSource<CandidateQuestion> (newDS);
-        });
+      this.activeRoute.data.subscribe ((routeData: Data) => {
+        this.inQuestionnaire = routeData.questionType === "CandidateQuestion";
+        if (this.inQuestionnaire) {
+          this.dataSource = new MatTableDataSource<CandidateQuestion> ();
+        } else {
+          this.questionService.getQuestions ()
+            .subscribe (questions => {
+              let newDS: CandidateQuestion[] = [];
+              for (let q of questions) {
+                newDS.push (new CandidateQuestion ("", "", q));
+              }
+              this.dataSource = new MatTableDataSource<CandidateQuestion> (newDS);
+            });
+        }
+      });
     }
   }
 
@@ -52,4 +60,7 @@ export class QuestionsComponent implements OnInit , AfterViewInit {
     }
   }
 
+  onNew () {
+    this.router.navigate(["questions", "new"], { queryParams: {questionnaireId: this.questionnaireId}, relativeTo: null });
+  }
 }

@@ -1,64 +1,42 @@
-<mat-table #table [dataSource]="dataSource" matSort class="mat-table-container mat-elevation-z8">
+<div class="row col-2 justify-content-start">
+  <button class="btn btn-raised btn-primary" type="button" (click)="onNew()">Create New</button>
+</div>
 
-  <ng-container matColumnDef="question-edit">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let row"><a (click)="onEdit(row.getId())"><i class="far fa-edit"></i></a></mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="candidateAnswer">
-    <mat-header-cell *matHeaderCellDef>Candidate Answer</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.candidateAnswer }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="questionText">
-    <mat-header-cell *matHeaderCellDef>Question</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.questionText }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="answer">
-    <mat-header-cell *matHeaderCellDef>Correct Answer</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.answer }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="difficulty">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Question Difficulty</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.difficulty }}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="category">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Question Category</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{ row.category }}</mat-cell>
-  </ng-container>
+<div class="row">
+  <div class="col-12">
+
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-table-container mat-elevation-z8">
+
+      <ng-container matColumnDef="question-edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row"><a (click)="onEdit(row.getId())"><i class="far fa-edit"></i></a></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="candidateAnswer">
+        <mat-header-cell *matHeaderCellDef>Candidate Answer</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.candidateAnswer }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="questionText">
+        <mat-header-cell *matHeaderCellDef>Question</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.questionText }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="answer">
+        <mat-header-cell *matHeaderCellDef>Correct Answer</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.answer }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="difficulty">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Question Difficulty</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.difficulty }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Question Category</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row.category }}</mat-cell>
+      </ng-container>
 
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-</mat-table>
+    </mat-table>
 
-
-<!--<table mat-table [dataSource]="dataSource" matSort>-->
-  <!--<ng-container matColumnDef="candidateAnswer">-->
-    <!--<th mat-header-cell *matHeaderCellDef>Candidate Answer</th>-->
-    <!--<td mat-cell *matCellDef="let row">{{ row.candidateAnswer }}</td>-->
-  <!--</ng-container>-->
-  <!--<ng-container matColumnDef="question">-->
-    <!--<th mat-header-cell *matHeaderCellDef>Question</th>-->
-    <!--<td mat-cell *matCellDef="let row">{{ row.questionText }}</td>-->
-  <!--</ng-container>-->
-  <!--<ng-container matColumnDef="question-answer">-->
-    <!--<th mat-header-cell *matHeaderCellDef>Correct Answer</th>-->
-    <!--<td mat-cell *matCellDef="let row">{{ row.answer }}</td>-->
-  <!--</ng-container>-->
-  <!--<ng-container matColumnDef="question-difficulty">-->
-    <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Question Difficulty</th>-->
-    <!--<td mat-cell *matCellDef="let row">{{ row.question.difficulty }}</td>-->
-  <!--</ng-container>-->
-  <!--<ng-container matColumnDef="question-category">-->
-    <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Question Category</th>-->
-    <!--<td mat-cell *matCellDef="let row">{{ row.question.category }}</td>-->
-  <!--</ng-container>-->
-  <!--<ng-container matColumnDef="question-edit">-->
-    <!--<th mat-header-cell *matHeaderCellDef>Edit Question</th>-->
-    <!--<td mat-cell *matCellDef="let row"><a (click)="onEdit(row.getId())"><i class="far fa-edit"></i></a></td>-->
-  <!--</ng-container>-->
-
-  <!--<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
-  <!--<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
-
-<!--</table>-->
+  </div>
+</div>

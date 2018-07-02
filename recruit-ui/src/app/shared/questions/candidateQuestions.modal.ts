@@ -1,4 +1,6 @@
-import {Question} from "./question.modal";
+import {Question}    from "./question.modal";
+import { Dificulty } from "./dificulty.modal";
+import { Category }  from "./category.modal";
 
 export class CandidateQuestion {
   constructor(              private id: string,
@@ -10,10 +12,10 @@ export class CandidateQuestion {
   get answer(): string {
     return this.question.answer;
   }
-  get difficulty(): string {
+  get difficulty(): Dificulty {
     return this.question.difficulty;
   }
-  get category(): string {
+  get category(): Category {
     return this.question.category;
   }
   getId(): string {

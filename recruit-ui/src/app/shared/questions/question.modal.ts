@@ -1,14 +1,15 @@
+import { Category }  from "./category.modal";
+import { Dificulty } from "./dificulty.modal";
+
 export class Question {
   constructor(
-              private id: string,
+              public id: string,
               public question:string,
               public answer:string,
-              public difficulty:string,
-              public category:string){}
+              public difficulty: Dificulty,
+              public category: Category){}
   get questionText():string{
     return this.question;
   }
-  getId():string{
-    return this.id;
-  }
+
 }
