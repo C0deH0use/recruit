@@ -1,0 +1,5 @@
+<FindBugsFilter>
+    <Match>
+        <Pacakge name="com.sfr.integration.ucm.ws"/>
+    </Match>
+</FindBugsFilter>

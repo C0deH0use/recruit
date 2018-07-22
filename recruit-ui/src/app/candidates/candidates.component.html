@@ -1,0 +1,69 @@
+<div matchHeight="card">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Candidates</h4>
+        </div>
+        <div class="card-body">
+          <div class="card-block">
+            <div class="row">
+              <div class="col-3">
+                <button class="btn btn-raised btn-primary" type="button" (click)="onNewCandidate()">Create New</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <div class="row">
+              <div class="col-12">
+                <mat-table #table [dataSource]="dataSource" matSort class="mat-table-container mat-elevation-z8">
+                  <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let row"><span (click)="onNavigateToDetails(row.id)"><i class="fas fa-angle-right"></i></span></mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Candidate Id</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>First name</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="surname">
+                    <mat-header-cell *matHeaderCellDef>Surname</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.surname }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.email }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="recruitedDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Recruited Date</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.recruitedDate }}</mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                </mat-table>
+
+                <mat-paginator [length]="100"
+                               [pageSize]="10"
+                               [pageSizeOptions]="pageSizeOptions"
+                               showFirstLastButtons>
+                </mat-paginator>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

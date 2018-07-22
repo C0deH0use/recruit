@@ -1,0 +1,6 @@
+language: java
+script: ./gradlew clean build integrationTest
+notifications:
+  # Email notifications are disabled to not annoy anybody.
+  # about configuring notification recipients and more.
+  email: true

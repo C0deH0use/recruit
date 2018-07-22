@@ -1,0 +1,59 @@
+<div matchHeight="card">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Question <span *ngIf="!isNew" class="text-secondary">&ndash; {{ questionId }}</span></h4>
+          <h4 class="card-subtitle" *ngIf="isNew">New question</h4>
+        </div>
+        <div class="card-block">
+          <form novalidate name="add-edit-question-form">
+            <div class="form-row">
+              <div class="form-group col-3 justify-content-end">
+                <label for="difficultyDd">Question difficulty</label>
+                <div id="difficultyDd" ngbDropdown>
+                  <button ngbDropdownToggle class="text-right btn btn-block btn-outline-secondary" type="button" id="difficultyMenu">{{ model.difficulty }}</button>
+                  <div ngbDropdownMenu aria-labelledby="difficultyMenu" class="btn-block">
+                    <a class="dropdown-item" *ngFor="let difficulty of difficulties" [class.active]="model.difficulty === difficulty" (click)="onDifficultySet(difficulty)">{{ difficulty }}
+                    </a>
+                  </div>
+                </div>
+            </div>
+
+              <div class="form-group col-3 justify-content-end">
+                <label for="categoryDd">Question category</label>
+                <div id="categoryDd" ngbDropdown>
+                  <button ngbDropdownToggle class="text-right btn-block btn btn-outline-secondary" id="categoryMenu" type="button">{{ model.category }}</button>
+                  <div ngbDropdownMenu aria-labelledby="categoryMenu" class="btn-block">
+                    <a class="dropdown-item" *ngFor="let category of categories" [class.active]="model.category === category" (click)="onCategorySet(category)">{{ category }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-12">
+                <label for="question">Question</label>
+                <textarea id="question" name="question" type="text" class="form-control" rows="3" [(ngModel)]="model.question" [readonly]="!isNew"></textarea>
+              </div>
+            </div>
+
+            <div *ngIf="withAnswer" class="form-row">
+              <div class="form-group col-12">
+                <label for="candidate-answer">Answer</label>
+                <textarea id="candidate-answer" name="candidate-answer" class="form-control" placeholder="Candidate Answer" rows="3" [(ngModel)]="model.answer"></textarea>
+              </div>
+            </div>
+
+            <div class="row col-3 justify-content-end">
+              <div class="justify-content-end">
+                <button class="btn btn-raised btn-info m-2" type="button" (click)="onCancel()">Cancel</button>
+                <button class="btn btn-raised btn-primary m-2" type="submit" (click)="onSave()">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

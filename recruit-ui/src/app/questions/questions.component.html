@@ -1,0 +1,69 @@
+<div matchHeight="card">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Candidates</h4>
+        </div>
+
+        <div class="card-body">
+          <div class="card-block">
+            <div class="row">
+              <div class="col-3">
+                <button class="btn btn-raised btn-primary" type="button" (click)="onNew()">Create New</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-block">
+            <div class="row">
+              <div class="col-12">
+
+                <mat-table #table [dataSource]="dataSource" matSort class="mat-table-container mat-elevation-z8">
+
+                  <ng-container matColumnDef="question-edit">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let row"><a (click)="onEdit(row.id)"><i class="far fa-edit"></i></a></mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="candidateAnswer">
+                    <mat-header-cell *matHeaderCellDef>Candidate Answer</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.candidateAnswer }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="questionText">
+                    <mat-header-cell *matHeaderCellDef>Question</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.questionText }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="answer">
+                    <mat-header-cell *matHeaderCellDef>Correct Answer</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.answer }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="difficulty">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Question Difficulty</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.difficulty }}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="category">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Question Category</mat-header-cell>
+                    <mat-cell *matCellDef="let row">{{ row.category }}</mat-cell>
+                  </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                </mat-table>
+
+                <mat-paginator [length]="100"
+                               [pageSize]="10"
+                               [pageSizeOptions]="pageSizeOptions"
+                               showFirstLastButtons>
+                </mat-paginator>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

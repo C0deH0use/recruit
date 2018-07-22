@@ -1,13 +1,15 @@
 package com.code.house.recruit;
 
+import com.code.house.recruit.data.DataConfig;
+import com.code.house.recruit.domain.ServiceDomainConfig;
+import com.code.house.recruit.web.WebConfig;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"com.code.house.recruit.common.nosql.doc"})
-@EnableMongoRepositories(basePackages = {"com.code.house.recruit.common.nosql.repos"})
+@SuppressWarnings("PMD.UseUtilityClass")
+@Import(value = {WebConfig.class, ServiceDomainConfig.class, DataConfig.class})
 public class RecruitApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder()

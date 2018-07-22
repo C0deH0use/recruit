@@ -1,0 +1,40 @@
+<div matchHeight="card">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Questionnaire <span *ngIf="!isNew" class="text-secondary">&ndash; {{ modal.id }}</span></h4>
+          <h4 class="card-subtitle" *ngIf="isNew">New Questionnaire</h4>
+        </div>
+        <div class="card-block">
+          <form novalidate name="add-edit-questionnaire-form" >
+            <div class="row">
+              <div class="col-12">
+                <div class="form-row">
+                  <div class="form-group col-6">
+                    <label for="candidate">User</label>
+                    <input id="candidate" name="candidateName" type="text" placeholder="Candidate Name" class="form-control" [(ngModel)]="modal.user" [readonly]="!isNew">
+                  </div>
+                  <div class="form-group col-6">
+                    <label for="additional-notes">Additional Notes</label>
+                    <input id="additional-notes" name="additionalNotes" type="text" placeholder="Additional Notes..." class="form-control" [(ngModel)]="modal.additionalNotes">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-12">
+                <questions [questionnaireId]="modal.id" [candidateQuestions]="modal.candidateQuestions"></questions>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col-2">
+                  //Buttons
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
