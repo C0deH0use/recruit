@@ -3,6 +3,7 @@ import { Question }   from "../questions/question.modal";
 import { Observable } from "rxjs/Observable";
 import { Dificulty }  from "../questions/dificulty.modal";
 import { Category }   from "../questions/category.modal";
+import { UUID }       from "angular2-uuid";
 
 @Injectable ()
 export class QuestionService {
@@ -24,6 +25,14 @@ export class QuestionService {
       new Question ("10", "Question Mid Web 2", "Correct Answer", Dificulty.MID, Category.WEB),
       new Question ("9", "Question Mid Web 1", "Correct Answer", Dificulty.MID, Category.WEB)
     ];
+  }
+
+  public save( question: Question) : Observable<Question[]> {
+      if(question.id == null) {
+        question.id = UUID.UUID();
+      }
+      this.questions.push(question);
+      return this.getQuestions();
   }
 
   public getQuestions () : Observable<Question[]> {

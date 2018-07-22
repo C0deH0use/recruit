@@ -5,6 +5,7 @@ import {Question}                 from "../questions/question.modal";
 import {CandidateQuestion}        from "../questions/candidateQuestions.modal";
 import { Category }               from "../questions/category.modal";
 import { Dificulty }              from "../questions/dificulty.modal";
+import { UUID }                   from "angular2-uuid";
 
 @Injectable()
 export class QuestionnaireService {
@@ -35,7 +36,26 @@ export class QuestionnaireService {
     return new Observable<Questionnaire[]>(observer => observer.next(this.questionnaires));
   }
 
-  findById(questionnaireId: string) : Questionnaire {
-    return  this.questionnaires.filter((value: Questionnaire) => value.id === questionnaireId)[0];
+  findById(questionnaireId: string) : Observable<Questionnaire> {
+    let questionnaire = this.questionnaires.find((value: Questionnaire) => value.id === questionnaireId);
+    return  new Observable<Questionnaire>(observable => observable.next(questionnaire));
+  }
+
+  save (questionnaireId: string, canQuest: CandidateQuestion) : Observable<Questionnaire> {
+    let questionnaire = this.questionnaires
+      .find((value: Questionnaire) => value.id === questionnaireId);
+
+    if(canQuest.id == null ){
+      canQuest.id = UUID.UUID();
+    }
+
+    let findIndex = questionnaire.candidateQuestions.findIndex((candidateQuest: CandidateQuestion) => candidateQuest.id === canQuest.id);
+    if(findIndex > -1){
+      questionnaire.candidateQuestions[findIndex] = canQuest;
+    } else {
+      questionnaire.candidateQuestions.push (canQuest);
+    }
+
+    return this.findById(questionnaireId);
   }
 }

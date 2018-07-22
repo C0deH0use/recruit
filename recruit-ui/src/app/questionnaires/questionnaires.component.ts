@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router }                      from '@angular/router';
 
-import { MatSort, MatTableDataSource } from '@angular/material';
-import { DataSource }                  from '@angular/cdk/collections'
-import { Observable }                  from "rxjs/Observable";
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { DataSource }                                from '@angular/cdk/collections'
+import { Observable }                                from "rxjs/Observable";
 
 import { QuestionnaireService } from '../shared/services/questionnaire.service';
 import { Questionnaire }        from "../shared/questionnaries/questionnaire.modal";
@@ -16,13 +16,15 @@ import { Questionnaire }        from "../shared/questionnaries/questionnaire.mod
 })
 export class QuestionnairesComponent implements OnInit, AfterViewInit {
   @ViewChild (MatSort) sort: MatSort;
-  displayedColumns: string[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  displayedColumns: string[] = ['action', 'id', 'user', 'createdDate', 'additionalNotes'];
+
   dataSource: MatTableDataSource<Questionnaire>;
 
 
-  constructor(private questionnaireService: QuestionnaireService, private router: Router, private activeRoute: ActivatedRoute) {
-    this.displayedColumns = ['action', 'id', 'user', 'createdDate', 'additionalNotes'];
-  }
+  constructor(private questionnaireService: QuestionnaireService, private router: Router, private activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.questionnaireService.getQuestionnaires()
@@ -33,6 +35,7 @@ export class QuestionnairesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit () {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   onNewQuestionnaire() {
@@ -40,6 +43,6 @@ export class QuestionnairesComponent implements OnInit, AfterViewInit {
   }
 
   onNavigateToDetails(questionnaireId: string) {
-    this.router.navigate([questionnaireId], {relativeTo: this.activeRoute});
+    this.router.navigate(['by-id', questionnaireId], {relativeTo: this.activeRoute});
   }
 }

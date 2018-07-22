@@ -15,6 +15,8 @@ import { AuthGuard }            from './shared/auth/auth-guard.service';
 import { QuestionnaireService } from "./shared/services/questionnaire.service";
 import { QuestionnairesModule } from "./questionnaires/questionnaires.module";
 import { QuestionService }      from "./shared/services/question.service";
+import { CandidatesService }    from "./shared/services/candidates.service";
+import { CandidatesModule }     from "./candidates/candidates.module";
 
 @NgModule({
     declarations: [
@@ -24,6 +26,7 @@ import { QuestionService }      from "./shared/services/question.service";
     imports: [
         BrowserAnimationsModule,
         QuestionnairesModule,
+        CandidatesModule,
         AppRoutingModule,
         SharedModule,
         NgbModule.forRoot()
@@ -31,6 +34,7 @@ import { QuestionService }      from "./shared/services/question.service";
     providers: [
         QuestionnaireService,
         QuestionService,
+        CandidatesService,
         AuthService,
         AuthGuard
     ],

@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatSortHeaderIntl, MatTableDataSource }     from "@angular/material";
-import { CandidateQuestion }                                  from "../shared/questions/candidateQuestions.modal";
-import { QuestionService }                                    from "../shared/services/question.service";
-// import { Question }                                       from "../shared/questions/question.modal";
-import { ActivatedRoute, Data, Router }                       from "@angular/router";
+import { AfterViewInit, Component, Input, OnInit, ViewChild }           from '@angular/core';
+import { MatPaginator, MatSort, MatSortHeaderIntl, MatTableDataSource } from "@angular/material";
+import { CandidateQuestion }                                            from "../shared/questions/candidateQuestions.modal";
+import { QuestionService }                                              from "../shared/services/question.service";
+import { ActivatedRoute, Data, Router }                                 from "@angular/router";
+import { Question }                                                     from "../shared/questions/question.modal";
 
 @Component ({
   selector: 'questions',
@@ -12,11 +12,15 @@ import { ActivatedRoute, Data, Router }                       from "@angular/rou
 })
 export class QuestionsComponent implements OnInit , AfterViewInit {
   @ViewChild (MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input () questionnaireId: string;
   @Input () candidateQuestions: CandidateQuestion[];
+
   private inQuestionnaire : boolean = false;
-  dataSource: MatTableDataSource<CandidateQuestion>;
+  dataSource: MatTableDataSource<CandidateQuestion> | MatTableDataSource<Question>;
+
   displayedColumns: string[] = [ 'question-edit', 'questionText', 'answer', 'difficulty', 'category' ];
+  pageSizeOptions: number[] = [5, 10, 25, 100];
 
   constructor (private questionService: QuestionService, private router: Router,  private activeRoute: ActivatedRoute) {
   }
@@ -33,11 +37,7 @@ export class QuestionsComponent implements OnInit , AfterViewInit {
         } else {
           this.questionService.getQuestions ()
             .subscribe (questions => {
-              let newDS: CandidateQuestion[] = [];
-              for (let q of questions) {
-                newDS.push (new CandidateQuestion ("", "", q));
-              }
-              this.dataSource = new MatTableDataSource<CandidateQuestion> (newDS);
+              this.dataSource = new MatTableDataSource<Question> (questions);
             });
         }
       });
@@ -50,13 +50,14 @@ export class QuestionsComponent implements OnInit , AfterViewInit {
    */
   ngAfterViewInit () {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   onEdit (id: string) {
     if (this.candidateQuestions != null) {
-      this.router.navigate ([ "questions", "with-answer", id ], { relativeTo: null });
+      this.router.navigate ([ "questions", "with-answer", id ], { queryParams: {questionnaireId: this.questionnaireId}, relativeTo: null });
     } else {
-      this.router.navigate ([ "questions", id ], { relativeTo: null });
+      this.router.navigate ([ "questions", "by-id", id ], { queryParams: {questionnaireId: this.questionnaireId}, relativeTo: null });
     }
   }
 
